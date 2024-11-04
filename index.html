@@ -5,18 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="card-position"  onclick="toggleFlip()">
-        <div class="fullcard size">
-            <div class="content-left card"></div>
-            <div class="cover card"></div>
-        </div>
-        <div class="content-right size"></div>
+    <div class="card-position">
+        <div class="fullcard">
+            <div class="page-1">
+                <div class="front"></div>
+                <div class="back"></div>
 
+            </div>
+
+            <div class="page-2">
+                <div class="front"></div>
+                <div class="back"></div>
+            </div>
+
+            <div class="page-3">
+                <div class="front"></div>
+                <div class="back"></div>
+            </div>
+        </div>
     </div>
 
 
@@ -24,25 +34,80 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
     <script>
-        function toggleFlip() {
-            const fullcard = document.querySelector('.fullcard');
-            const moveItems = document.querySelector('.card-position');
-            fullcard.classList.toggle('flipped');
-            moveItems.classList.toggle('moveItems');
-        }
-    </script>
+        const page1 = document.querySelector('.page-1');
+        const page2 = document.querySelector('.page-2');
+        const page3 = document.querySelector('.page-3');
+        const fullcard = document.querySelector('.fullcard');
+        const fullcardWidth = fullcard.clientWidth;
+        const halfFullcardWidth = fullcardWidth / 2;
 
+        let clicknumber = 0
+
+        function translateCard(translatePx) {
+            fullcard.style.transform = `translateX(${translatePx}px)`;
+        }
+        function addFlip(page, rotationAngle) {
+            page.classList.add('changePage');
+            page.style.transform = `rotateY(${rotationAngle}deg)`;
+        }
+
+        function removeFlip(page) {
+            page.classList.remove('changePage');
+            page.style.transform = '';  // 清除自定義的旋轉角度
+        }
+
+        // 根據 clicknumber 值來控制 class
+        // 首先移除所有的 changePage class
+        removeFlip(page1);
+        removeFlip(page2);
+        removeFlip(page3);
+
+        document.addEventListener("click", function (event) {
+            // 獲取螢幕的寬度
+            const screenWidth = window.innerWidth;
+
+            // 檢查點擊是否在螢幕的右半邊
+            if (event.clientX > screenWidth / 2 && clicknumber < 3) {
+                // 如果點擊在右半邊且 clicknumber 小於 5，讓 clicknumber 加 1
+                clicknumber += 1;
+                console.log("點擊在右半邊，clicknumber:", clicknumber);
+            }
+            // 檢查點擊是否在螢幕的左半邊，且 clicknumber 大於 0
+            else if (event.clientX <= screenWidth / 2 && clicknumber > 0) {
+                // 如果點擊在左半邊且 clicknumber 大於 0，讓 clicknumber 減 1
+                clicknumber -= 1;
+                console.log("點擊在左半邊，clicknumber:", clicknumber);
+            }
+
+            // 再依據 clicknumber 增加對應的 class
+            switch (clicknumber) {
+                case 0:
+                    removeFlip(page1);
+                    removeFlip(page2);
+                    removeFlip(page3);
+                    break;
+                case 1:
+                    addFlip(page1, -130, 0);
+                    removeFlip(page2);
+                    removeFlip(page3);
+                    break;
+                case 2:
+                    addFlip(page1, -130, 0);
+                    addFlip(page2, -130, 0);
+                    removeFlip(page3);
+                    translateCard(0)
+                    break;
+                case 3:
+                    addFlip(page1, -180);
+                    addFlip(page2, -180);
+                    addFlip(page3, -180);
+                    addFlip(page3);
+                    translateCard(fullcardWidth)
+                    break;
+            }
+        });
+    </script>
 </body>
 
 </html>
