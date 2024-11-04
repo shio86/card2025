@@ -82,50 +82,116 @@
         removeFlip(page2);
         removeFlip(page3);
 
-        document.addEventListener("click", function (event) {
-            // 獲取螢幕的寬度
+        // document.addEventListener("click", function (event) {
+        //     // 獲取螢幕的寬度
+        //     const screenWidth = window.innerWidth;
+
+        //     // 檢查點擊是否在螢幕的右半邊
+        //     if (event.clientX > screenWidth / 2 && clicknumber < 3) {
+        //         // 如果點擊在右半邊且 clicknumber 小於 5，讓 clicknumber 加 1
+        //         clicknumber += 1;
+        //         console.log("點擊在右半邊，clicknumber:", clicknumber);
+        //     }
+        //     // 檢查點擊是否在螢幕的左半邊，且 clicknumber 大於 0
+        //     else if (event.clientX <= screenWidth / 2 && clicknumber > 0) {
+        //         // 如果點擊在左半邊且 clicknumber 大於 0，讓 clicknumber 減 1
+        //         clicknumber -= 1;
+        //         console.log("點擊在左半邊，clicknumber:", clicknumber);
+        //     }
+
+        //     // 再依據 clicknumber 增加對應的 class
+        //     switch (clicknumber) {
+        //         case 0:
+        //             removeFlip(page1);
+        //             removeFlip(page2);
+        //             removeFlip(page3);
+        //             break;
+        //         case 1:
+        //             addFlip(page1, -130, 0);
+        //             removeFlip(page2);
+        //             removeFlip(page3);
+        //             break;
+        //         case 2:
+        //             addFlip(page1, -130, 0);
+        //             addFlip(page2, -130, 0);
+        //             removeFlip(page3);
+        //             translateCard(0)
+        //             break;
+        //         case 3:
+        //             addFlip(page1, -180);
+        //             addFlip(page2, -180);
+        //             addFlip(page3, -180);
+        //             addFlip(page3);
+        //             translateCard(fullcardWidth)
+        //             break;
+        //     }
+        // });
+
+        document.addEventListener("mousedown", function (event) {
             const screenWidth = window.innerWidth;
+            let startX = event.clientX;
+            let isDragging = false;
 
-            // 檢查點擊是否在螢幕的右半邊
-            if (event.clientX > screenWidth / 2 && clicknumber < 3) {
-                // 如果點擊在右半邊且 clicknumber 小於 5，讓 clicknumber 加 1
-                clicknumber += 1;
-                console.log("點擊在右半邊，clicknumber:", clicknumber);
-            }
-            // 檢查點擊是否在螢幕的左半邊，且 clicknumber 大於 0
-            else if (event.clientX <= screenWidth / 2 && clicknumber > 0) {
-                // 如果點擊在左半邊且 clicknumber 大於 0，讓 clicknumber 減 1
-                clicknumber -= 1;
-                console.log("點擊在左半邊，clicknumber:", clicknumber);
+            function onMouseMove(event) {
+                if (!isDragging) return;
+
+                const diffX = event.clientX - startX;
+
+                // 判斷拖曳距離超過一定值
+                if (diffX < -100) { // 左側拖曳
+                    clicknumber = Math.min(clicknumber + 1, 3); // 增加 clicknumber
+                    console.log("點擊在左半邊，clicknumber:", clicknumber);
+                    isDragging = false; // 停止拖曳
+                } else if (diffX > 100) { // 右側拖曳
+                    clicknumber = Math.max(clicknumber - 1, 0); // 減少 clicknumber
+                    console.log("點擊在右半邊，clicknumber:", clicknumber);
+                    isDragging = false; // 停止拖曳
+                }
             }
 
-            // 再依據 clicknumber 增加對應的 class
-            switch (clicknumber) {
-                case 0:
-                    removeFlip(page1);
-                    removeFlip(page2);
-                    removeFlip(page3);
-                    break;
-                case 1:
-                    addFlip(page1, -130, 0);
-                    removeFlip(page2);
-                    removeFlip(page3);
-                    break;
-                case 2:
-                    addFlip(page1, -130, 0);
-                    addFlip(page2, -130, 0);
-                    removeFlip(page3);
-                    translateCard(0)
-                    break;
-                case 3:
-                    addFlip(page1, -180);
-                    addFlip(page2, -180);
-                    addFlip(page3, -180);
-                    addFlip(page3);
-                    translateCard(fullcardWidth)
-                    break;
+            function onMouseUp() {
+                // 根據 clicknumber 的值進行對應的操作
+                switch (clicknumber) {
+                    case 0:
+                        removeFlip(page1);
+                        removeFlip(page2);
+                        removeFlip(page3);
+                        break;
+                    case 1:
+                        addFlip(page1, -130, 0);
+                        removeFlip(page2);
+                        removeFlip(page3);
+                        break;
+                    case 2:
+                        addFlip(page1, -130, 0);
+                        addFlip(page2, -130, 0);
+                        removeFlip(page3);
+                        translateCard(0);
+                        break;
+                    case 3:
+                        addFlip(page1, -180);
+                        addFlip(page2, -180);
+                        addFlip(page3, -180);
+                        translateCard(fullcardWidth);
+                        break;
+                }
+
+                // 清理事件
+                isDragging = false; // 停止拖曳
+                document.removeEventListener("mousemove", onMouseMove);
+                document.removeEventListener("mouseup", onMouseUp);
             }
+
+            document.addEventListener("mousemove", onMouseMove);
+            document.addEventListener("mouseup", onMouseUp);
+
+            // 記錄拖曳狀態
+            isDragging = true;
         });
+
+
+
+
 
 
     </script>
