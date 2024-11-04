@@ -39,10 +39,29 @@
         const page2 = document.querySelector('.page-2');
         const page3 = document.querySelector('.page-3');
         const fullcard = document.querySelector('.fullcard');
-        const fullcardWidth = fullcard.clientWidth;
-        const halfFullcardWidth = fullcardWidth / 2;
+        let fullcardWidth
 
         let clicknumber = 0
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const vhValue = window.innerHeight; // 獲取 100vh 的實際數值
+            const vwValue = window.innerWidth; // 獲取 100vw 的實際數值
+
+            // 計算 fullcardWidth
+            if (vhValue > vwValue) {
+                fullcardWidth = vwValue * 0.8; // 如果 vhValue 大於 vwValue，設置為 vwValue 的 80%
+            } else {
+                fullcardWidth = vhValue * 0.7; // 如果 vwValue 大於 vhValue，設置為 vhValue 的 80%
+            }
+
+            document.documentElement.style.setProperty('--fullcard-width', `${fullcardWidth}px`);
+
+            const borderRadiusValue = fullcardWidth * 0.04;
+            document.documentElement.style.setProperty('--border-radius', borderRadiusValue + 'px');
+
+        });
+
+        // const fullcardTureWidth = fullcard.clientWidth;
 
         function translateCard(translatePx) {
             fullcard.style.transform = `translateX(${translatePx}px)`;
@@ -107,6 +126,8 @@
                     break;
             }
         });
+
+
     </script>
 </body>
 
