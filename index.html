@@ -127,67 +127,86 @@
         //     }
         // });
 
-        document.addEventListener("mousedown", function (event) {
-            const screenWidth = window.innerWidth;
-            let startX = event.clientX;
-            let isDragging = false;
+        let isDragging = false;
+        let startX = 0;
 
-            function onMouseMove(event) {
-                if (!isDragging) return;
-
-                const diffX = event.clientX - startX;
-
-                // 判斷拖曳距離超過一定值
-                if (diffX < -100) { // 左側拖曳
-                    clicknumber = Math.min(clicknumber + 1, 3); // 增加 clicknumber
-                    console.log("點擊在左半邊，clicknumber:", clicknumber);
-                    isDragging = false; // 停止拖曳
-                } else if (diffX > 100) { // 右側拖曳
-                    clicknumber = Math.max(clicknumber - 1, 0); // 減少 clicknumber
-                    console.log("點擊在右半邊，clicknumber:", clicknumber);
-                    isDragging = false; // 停止拖曳
-                }
-            }
-
-            function onMouseUp() {
-                // 根據 clicknumber 的值進行對應的操作
-                switch (clicknumber) {
-                    case 0:
-                        removeFlip(page1);
-                        removeFlip(page2);
-                        removeFlip(page3);
-                        break;
-                    case 1:
-                        addFlip(page1, -130, 0);
-                        removeFlip(page2);
-                        removeFlip(page3);
-                        break;
-                    case 2:
-                        addFlip(page1, -130, 0);
-                        addFlip(page2, -130, 0);
-                        removeFlip(page3);
-                        translateCard(0);
-                        break;
-                    case 3:
-                        addFlip(page1, -180);
-                        addFlip(page2, -180);
-                        addFlip(page3, -180);
-                        translateCard(fullcardWidth);
-                        break;
-                }
-
-                // 清理事件
-                isDragging = false; // 停止拖曳
-                document.removeEventListener("mousemove", onMouseMove);
-                document.removeEventListener("mouseup", onMouseUp);
-            }
-
-            document.addEventListener("mousemove", onMouseMove);
-            document.addEventListener("mouseup", onMouseUp);
-
-            // 記錄拖曳狀態
+        function handleDragStart(event) {
             isDragging = true;
-        });
+
+            // 如果是觸控事件，取得觸控的 X 座標
+            if (event.touches) {
+                startX = event.touches[0].clientX;
+            } else {
+                startX = event.clientX;
+            }
+        }
+
+        function handleDragMove(event) {
+            if (!isDragging) return;
+
+            let currentX;
+
+            // 如果是觸控事件，取得觸控的 X 座標
+            if (event.touches) {
+                currentX = event.touches[0].clientX;
+            } else {
+                currentX = event.clientX;
+            }
+
+            const diffX = currentX - startX;
+
+            // 判斷拖曳距離超過一定值
+            if (diffX < -100) { // 左側拖曳
+                clicknumber = Math.min(clicknumber + 1, 3); // 增加 clicknumber
+                console.log("點擊在左半邊，clicknumber:", clicknumber);
+                isDragging = false; // 停止拖曳
+            } else if (diffX > 100) { // 右側拖曳
+                clicknumber = Math.max(clicknumber - 1, 0); // 減少 clicknumber
+                console.log("點擊在右半邊，clicknumber:", clicknumber);
+                isDragging = false; // 停止拖曳
+            }
+        }
+
+        function handleDragEnd() {
+            // 根據 clicknumber 的值進行對應的操作
+            switch (clicknumber) {
+                case 0:
+                    removeFlip(page1);
+                    removeFlip(page2);
+                    removeFlip(page3);
+                    break;
+                case 1:
+                    addFlip(page1, -130, 0);
+                    removeFlip(page2);
+                    removeFlip(page3);
+                    break;
+                case 2:
+                    addFlip(page1, -130, 0);
+                    addFlip(page2, -130, 0);
+                    removeFlip(page3);
+                    translateCard(0);
+                    break;
+                case 3:
+                    addFlip(page1, -180);
+                    addFlip(page2, -180);
+                    addFlip(page3, -180);
+                    translateCard(fullcardWidth);
+                    break;
+            }
+
+            // 清理事件
+            isDragging = false; // 停止拖曳
+        }
+
+        document.addEventListener("mousedown", handleDragStart);
+        document.addEventListener("mousemove", handleDragMove);
+        document.addEventListener("mouseup", handleDragEnd);
+
+        // 觸控事件
+        document.addEventListener("touchstart", handleDragStart);
+        document.addEventListener("touchmove", handleDragMove);
+        document.addEventListener("touchend", handleDragEnd);
+
 
 
 
