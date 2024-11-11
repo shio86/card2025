@@ -148,6 +148,238 @@ button {
     font-family: 'Chenyuluoyan';
     src: url('./ChenYuluoyan-Thin.ttf') format("truetype");
 }
+@font-face {
+    font-family: 'ZhuZiAWan';
+    src: url('./ZhuZiAWan-2.ttc') format("truetype");
+}
+
+/* 動畫區 */
+@keyframes ilineLogo{
+    0%{
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 0;
+        height: 300px;
+    }
+    60%{
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 1;
+        height: 300px;
+    }
+    80%{
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 0;
+        height: 300px;
+    }
+    85%{
+        top: 120px;
+        transform: translateY(0%);
+        opacity: 0;
+        height: 100px;
+    }
+    100%{
+        top: 120px;
+        transform: translateY(0%);
+        opacity: 1;
+        height: 100px;
+    }
+}
+
+@keyframes lantern {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    25% {
+        transform: translateY(0%);
+    }
+
+    40% {
+        transform: translateY(0%) rotate(1deg);
+    }
+
+    55% {
+        transform: translateY(0%) rotate(-1deg);
+    }
+
+    70% {
+        transform: translateY(0%) rotate(.5deg);
+    }
+
+    85% {
+        transform: translateY(0%) rotate(-.5deg);
+    }
+
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+@keyframes tips {
+    0% {
+
+        opacity: 0;
+    }
+    30% {
+        opacity: 1;
+    }
+
+    60% {
+        opacity: 1;
+    }
+
+    99% {
+        opacity: 0;
+    }
+
+    100% {
+        display: none;
+    }
+}
+
+@keyframes ripples {
+    from {
+        width: 5px;
+        opacity: 1;
+    }
+
+    to {
+        width: 100px;
+        opacity: 0;
+    }
+}
+
+@keyframes opacity{
+    from{
+        opacity: 0;
+    }to{
+        opacity: 1;
+    }
+}
+
+@keyframes year-down{
+    0%{
+        transform: translate(-50%,-100%);
+        opacity: 0;
+    }
+    50%{
+        transform: translate(-50%,0%);
+    }
+    100%{
+        transform: translate(-50%,0%);
+        opacity: 1;
+    }
+}
+
+@keyframes down{
+    0%{
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    50%{
+        transform: translateY(0%);
+    }
+    100%{
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes rise{
+    0%{
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    50%{
+        transform: translateY(0%);
+    }
+    100%{
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes leftBotton{
+    0%{
+        transform: translate(-100%,100%);
+        opacity: 0;
+    }
+    50%{
+        transform: translate(0%,0%);
+    }
+    100%{
+        transform: translate(0%,0%);
+        opacity: 1;
+    }
+}
+
+@keyframes left{
+    0%{
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    50%{
+        transform: translateX(0%);
+    }
+    100%{
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes triangle-left{
+    0%{
+        transform: rotate(180deg) translateX(100%);
+        opacity: 0;
+    }
+    50%{
+        transform: rotate(180deg) translateX(0%);
+    }
+    100%{
+        transform: rotate(180deg) translateX(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes right{
+    0%{
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    50%{
+        transform: translateX(0%);
+    }
+    100%{
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes flower-opacity{
+    0%{
+        transform: rotate(0deg);
+        opacity: 0;
+    }
+    50%{
+        transform: rotate(180deg);
+        opacity: 1;
+    }
+    100%{
+        transform: rotate(360deg);
+        opacity: 1;
+    }
+}
+
+@keyframes flower-rotate{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
 
 .card-position {
     height: 100vh;
@@ -196,6 +428,11 @@ button {
     background-image: url(./image/1.jpg);
 }
 
+.page-1 .back {
+    background-image: url(./image/4.jpg);
+}
+
+
 .front {
     transform: rotateY(0deg);
     backface-visibility: hidden;
@@ -210,6 +447,9 @@ button {
 /* .changePage{
     transform: rotateY(-130deg);
 } */
+
+
+/* 第二頁 */
 
 .page-2 {
     z-index: 3;
@@ -228,35 +468,31 @@ button {
     display: none;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+}
+
+.ilineLogo{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    height: 300px;
+    margin-bottom: 30px;
+    animation: ilineLogo 3.8s ease-in-out 0s normal forwards;
 }
 
 .contentText {
+    transform: translateY(65px);
     text-align: center;
     width: 70%;
-    font-family: "Chenyuluoyan";
-    font-size: 28px;
-    line-height: 200%;
+    font-family: "Noto Sans TC", sans-serif;
+    font-size: 24px;
+    line-height:200%;
+    font-weight: 300;
 
     opacity: 0;
-    animation: opacity 1.5s ease-in-out .8s normal forwards;
+    animation: opacity 1.5s ease-in-out 3.8s normal forwards;
 }
-
-.page-3 {
-    z-index: 2;
-}
-
-.page-3 .front {
-    background-image: url(./image/2.jpg);
-}
-
-.page-4 {
-    z-index: 1;
-}
-
-.page-1 .back {
-    background-image: url(./image/4.jpg);
-}
-
 
 /* 加載動畫樣式 */
 #loadingContainer {
@@ -313,6 +549,9 @@ button {
 }
 
 
+
+/* 第二頁 */
+
 /* 燈籠 */
 .ilineContent {
     background-image: url(./image/lantern.svg);
@@ -341,35 +580,6 @@ button {
 }
 
 /* 個別燈籠 */
-@keyframes lantern {
-    0% {
-        transform: translateY(-100%);
-    }
-
-    25% {
-        transform: translateY(0%);
-    }
-
-    40% {
-        transform: translateY(0%) rotate(1deg);
-    }
-
-    55% {
-        transform: translateY(0%) rotate(-1deg);
-    }
-
-    70% {
-        transform: translateY(0%) rotate(.5deg);
-    }
-
-    85% {
-        transform: translateY(0%) rotate(-.5deg);
-    }
-
-    100% {
-        transform: translateY(0%);
-    }
-}
 
 #iline-shop {
     height: 600px;
@@ -435,6 +645,7 @@ button {
 #close-btn {
     background-image: url(./image/btn/icon/close.svg);
     background-position: center;
+    background-repeat: no-repeat;
     position: absolute;
     right: 8px;
     top: 8px;
@@ -450,39 +661,7 @@ button {
 
 
 /* tips 提示動畫 */
-@keyframes tips {
-    0% {
 
-        opacity: 0;
-    }
-    30% {
-        opacity: 1;
-    }
-
-    60% {
-        opacity: 1;
-    }
-
-    99% {
-        opacity: 0;
-    }
-
-    100% {
-        display: none;
-    }
-}
-
-@keyframes ripples {
-    from {
-        width: 5px;
-        opacity: 1;
-    }
-
-    to {
-        width: 100px;
-        opacity: 0;
-    }
-}
 
 .tips {
     position: absolute;
@@ -551,98 +730,19 @@ button {
 }
 
 
+
+/* 第三頁 */
+.page-3 {
+    z-index: 2;
+}
+
+.page-3 .front {
+    background-image: url(./image/2.jpg);
+}
 /* 月曆 */
-@keyframes opacity{
-    from{
-        opacity: 0;
-    }to{
-        opacity: 1;
-    }
-}
 
-@keyframes year-down{
-    0%{
-        transform: translate(-50%,-100%);
-        opacity: 0;
-    }
-    50%{
-        transform: translate(-50%,0%);
-    }
-    100%{
-        transform: translate(-50%,0%);
-        opacity: 1;
-    }
-}
-
-@keyframes down{
-    0%{
-        transform: translateY(-100%);
-        opacity: 0;
-    }
-    50%{
-        transform: translateY(0%);
-    }
-    100%{
-        transform: translateY(0%);
-        opacity: 1;
-    }
-}
-
-@keyframes left{
-    0%{
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-    50%{
-        transform: translateX(0%);
-    }
-    100%{
-        transform: translateX(0%);
-        opacity: 1;
-    }
-}
-
-@keyframes right{
-    0%{
-        transform: translateX(100%);
-        opacity: 0;
-    }
-    50%{
-        transform: translateX(0%);
-    }
-    100%{
-        transform: translateX(0%);
-        opacity: 1;
-    }
-}
-
-@keyframes flower-opacity{
-    0%{
-        transform: rotate(0deg);
-        opacity: 0;
-    }
-    50%{
-        transform: rotate(180deg);
-        opacity: 1;
-    }
-    100%{
-        transform: rotate(360deg);
-        opacity: 1;
-    }
-}
-
-@keyframes flower-rotate{
-    0%{
-        transform: rotate(0deg);
-    }
-    100%{
-        transform: rotate(360deg);
-    }
-}
 
 #calenderpage{
-    flex-direction: column;
-    display: none;
     animation: opacity 1.5s ease-in-out normal forwards;;
 }
 
@@ -797,4 +897,221 @@ button {
 
 .claenderText .content p:nth-of-type(2){
     font-weight: 700;
+}
+
+
+/* 第四頁 */
+.page-4 {
+    z-index: 1;
+}
+
+#contactpage{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+#contactpage>img{
+    position: absolute;
+    /* display: none; */
+}
+
+.companyLogo{
+    position: relative;
+
+    opacity: 0;
+    animation: opacity 1.5s ease-in-out 1s normal forwards;
+}
+
+.contactcfan{
+    width: 350px;
+}
+
+.contactcloud-1,.contactcloud-2{
+    position: absolute;
+    width: 120px;
+
+    opacity: 0;
+}
+
+.contactcloud-1{
+    animation: left 3s ease-in-out 1s normal forwards;
+}
+
+.contactcloud-2{
+    animation: right 2.5s ease-in-out 1.5s normal forwards;
+}
+
+
+#contactpage>h4{
+    font-family: "ZhuZiAWan";
+    font-size: 28px;
+
+    opacity: 0;
+    animation: opacity 1.5s ease-in-out 1.3s normal forwards;
+}
+
+#contactpage>p{
+    font-family: "Noto Sans TC", sans-serif;
+    font-weight: 300;
+    text-align: center;
+    line-height: 160%;
+    font-size: 20px;
+
+    opacity: 0;
+    animation: opacity 1.5s ease-in-out 1.6s normal forwards;
+}
+
+.contactcloud-1{
+    left: -24px;
+    top: 23px;
+}
+.contactcloud-2{
+    right: -22px;
+    bottom: 18px;
+}
+
+.contactButton{
+    display: flex;
+    gap: 16px;
+
+    opacity: 0;
+    animation: rise 1.5s ease-in-out 2.3s normal forwards;
+}
+
+.contactButton>button{
+    color: #fff;
+    padding: 8px 28px;
+    border-radius: 50px;
+    font-size: 20px;
+    font-family: "ZhuZiAWan";
+}
+
+.conpanyWeb{
+    background-color: #F6BE5B;
+}
+
+.conpanyLine{
+    background-color: #22AC38;
+}
+
+
+.contactTriangle{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.contactTriangle>img{
+    position: absolute;
+    opacity: 0;
+}
+
+.darkredtriangle-1{
+    height: 500px;
+    left: 0;
+    bottom: 0;
+
+    animation: triangle-left 3s ease-in-out .5s normal forwards;
+}
+
+.darkredtriangle-2{
+    height: 430px;
+    right: 0;
+    top: 0;
+
+    animation: right 3s ease-in-out .5s normal forwards;
+}
+
+.greentriangle{
+    left: 0;
+    bottom: 0;
+    width: 480px;
+
+    animation: rise 3s ease-in-out .5s normal forwards;
+}
+
+.redtriangle{
+    left: 0;
+    bottom: 0;
+    width: 260px;
+
+    animation: leftBotton 3s ease-in-out .5s normal forwards;
+}
+
+.contactMoney-1,.contactMoney-2{
+    height: 700px;
+    
+    transform: translateY(-100%);
+    transform-origin: top;
+}
+
+.contactMoney-1{
+    left: 26px;
+    top: -380px;
+
+    animation: lantern 4s ease-in-out normal forwards;
+}
+
+.contactMoney-2{
+    right: 26px;
+    bottom: 210px;
+
+    animation: lantern 4s ease-in-out normal .5s forwards;
+}
+
+.contactYellowflower{
+    width: 110px;
+    left: 55px;
+    bottom: 140px;
+
+    opacity: 0;
+    animation: flower-opacity 8s ease 1.3s forwards, flower-rotate 8s linear 1.3s infinite;
+}
+
+.contactDarkredflower-1{
+    width: 35px;
+    left: 165px;
+    bottom: 115px;
+
+    opacity: 0;
+    animation: flower-opacity 8s ease 1.3s forwards, flower-rotate 8s linear 1.3s infinite;
+}
+
+.contactDarkredflower-2{
+    width: 30px;
+    left: 45px;
+    top: 355px;
+
+    opacity: 0;
+    animation: flower-opacity 8s ease 1.3s forwards, flower-rotate 8s linear 1.3s infinite;
+}
+
+.contactGreenflower-1{
+    width: 30px;
+    right: 145px;
+    top: 20px;
+
+    opacity: 0;
+    animation: flower-opacity 8s ease 1.3s forwards, flower-rotate 8s linear 1.3s infinite;
+}
+
+.contactGreenflower-2{
+    width: 75px;
+    left: -15px;
+    top: -20px;
+
+    opacity: 0;
+    animation: flower-opacity 8s ease 1.3s forwards, flower-rotate 8s linear 1.3s infinite;
+}
+
+.contactRedflower{
+    width: 75px;
+    right: 75px;
+    top: 50px;
+
+    opacity: 0;
+    animation: flower-opacity 8s ease 1.3s forwards, flower-rotate 8s linear 1.3s infinite;
 }

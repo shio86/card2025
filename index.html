@@ -33,16 +33,14 @@
 
                     <div class="page2Zoom" id="lanternpage">
                         <!-- 內文 -->
+                        <img class="ilineLogo" src="./image/iline-logo.svg" alt="">
                         <p class="contentText">
-                            親愛的藥師夥伴，感謝您長期的支持與信任！<br>
+                            親愛的藥師夥伴，<br>感謝您長期的支持與信任！<br><br>
 
                             我們即將推出全新的 iLINE 系統，助您更輕鬆地管理顧客關係，提升服務效率。<br>
-
                             透過 iLINE，您能快速掌握顧客消費喜好，並提供慢籤領藥功能，貼心提醒顧客領藥。<br>
-
                             此外，團購功能，幫助您靈活應對不同顧客的購物需求。<br>
-
-                            期待 iLINE 為您帶來更便捷的管理體驗，協助您提供更優質的社區服務！<br>
+                            期待 iLINE 為您帶來更便捷的管理體驗，<br>協助您提供更優質的社區服務！<br>
                         </p>
 
                         <!-- 團購 -->
@@ -150,8 +148,54 @@
                                     <p>此外，年節期間無法提供到府服務，不變之處請見諒。</p>
                                 </div>
                             </span>
-                            
+
                         </div>
+
+                    </div>
+                </div>
+                <div class="back"></div>
+            </div>
+
+            <div class="page-4">
+                <div class="front">
+                    <div class="page2Zoom" id="contactpage">
+
+                        <div class="companyLogo">
+                            <img class="contactcfan" src="./image/contact/contact-companylogo.svg" alt="">
+                            <img class="contactcloud-1" src="./image/contact/contact-greencloud.svg" alt="">
+                            <img class="contactcloud-2" src="./image/contact/contact-greencloud.svg" alt="">
+                        </div>
+
+                        <h4>樺穎資訊科技顧問有限公司</h4>
+
+                        <p>
+                            24248新北市新莊區中泰街65-1號1樓<br>
+                            TEL：02-29989420<br>
+                            FAX：02-2998-9435<br>
+                            假日服務電話：0918-808-588<br>
+                            統一編號：28534765<br>
+                        </p>
+
+                        <div class="contactButton">
+                            <button class="conpanyWeb">官方網頁</button>
+                            <button class="conpanyLine">官方LINE</button>
+                        </div>
+
+                        <div class="contactTriangle">
+                            <img class="darkredtriangle-1" src="./image/contact/contact-darkredtriangle.svg" alt="">
+                            <img class="darkredtriangle-2" src="./image/contact/contact-darkredtriangle.svg" alt="">
+                            <img class="greentriangle" src="./image/contact/contact-greentriangle.svg" alt="">
+                            <img class="redtriangle" src="./image/contact/contact-redtriangle.svg" alt="">
+                        </div>
+
+                        <img class="contactMoney-1" src="./image/contact/contact-money.svg" alt="">
+                        <img class="contactMoney-2" src="./image/contact/contact-money.svg" alt="">
+                        <img class="contactYellowflower" src="./image/contact/contact-yellowflower.svg" alt="">
+                        <img class="contactDarkredflower-1" src="./image/contact/contact-darkredflower.svg" alt="">
+                        <img class="contactDarkredflower-2" src="./image/contact/contact-darkredflower.svg" alt="">
+                        <img class="contactGreenflower-1" src="./image/calender/calender-greenflower.svg" alt="">
+                        <img class="contactGreenflower-2" src="./image/calender/calender-greenflower.svg" alt="">
+                        <img class="contactRedflower" src="./image/calender/calender-redflower.svg" alt="">
 
                     </div>
                 </div>
@@ -258,11 +302,10 @@
         }
 
 
-
-
-        // 日曆
+        // 第三頁（月曆）
         const calenderpage = document.getElementById("calenderpage");
-
+        // 第四頁（聯絡）
+        const contactpage = document.getElementById("contactpage");
 
 
 
@@ -270,6 +313,7 @@
         const page1 = document.querySelector('.page-1');
         const page2 = document.querySelector('.page-2');
         const page3 = document.querySelector('.page-3');
+        const page4 = document.querySelector('.page-4');
         const fullcard = document.querySelector('.fullcard');
         let fullcardWidth
 
@@ -281,7 +325,7 @@
 
             // 計算 fullcardWidth
             if (vhValue > vwValue) {
-                fullcardWidth = vwValue * 0.8; // 如果 vhValue 大於 vwValue，設置為 vwValue 的 80%
+                fullcardWidth = vwValue * 0.95; // 如果 vhValue 大於 vwValue，設置為 vwValue 的 80%
             } else {
                 fullcardWidth = vhValue * 0.7; // 如果 vwValue 大於 vhValue，設置為 vhValue 的 80%
             }
@@ -315,6 +359,8 @@
         removeFlip(page1);
         removeFlip(page2);
         removeFlip(page3);
+        removeFlip(page4);
+
 
         // document.addEventListener("click", function (event) {
         //     // 獲取螢幕的寬度
@@ -391,7 +437,7 @@
 
             // 判斷拖曳距離超過一定值
             if (diffX < -100) { // 左側拖曳
-                clicknumber = Math.min(clicknumber + 1, 3); // 增加 clicknumber
+                clicknumber = Math.min(clicknumber + 1, 4); // 增加 clicknumber
                 // console.log("點擊在左半邊，clicknumber:", clicknumber);
                 isDragging = false; // 停止拖曳
             } else if (diffX > 100) { // 右側拖曳
@@ -408,6 +454,7 @@
                     removeFlip(page1);
                     removeFlip(page2);
                     removeFlip(page3);
+                    removeFlip(page4);
                     closeLantern()
                     lanternpage.style.display = "none";
                     break;
@@ -415,6 +462,7 @@
                     addFlip(page1, -130, 0);
                     removeFlip(page2);
                     removeFlip(page3);
+                    removeFlip(page4);
                     hidePop()
                     calenderpage.style.display = "none";
                     lanternpage.style.display = "flex";
@@ -424,17 +472,29 @@
                     addFlip(page1, -130, 0);
                     addFlip(page2, -130, 0);
                     removeFlip(page3);
-                    translateCard(0);
+                    removeFlip(page4);
                     closeLantern()
                     calenderpage.style.display = "flex";
                     lanternpage.style.display = "none";
+                    contactpage.style.display = "none";
                     break;
                 case 3:
+                    addFlip(page1, -130, 0);
+                    addFlip(page2, -130, 0);
+                    addFlip(page3, -130, 0);
+                    removeFlip(page4);
+                    calenderpage.style.display = "none";
+                    contactpage.style.display = "flex";
+                    translateCard(0);
+                    break;
+                case 4:
                     addFlip(page1, -180);
                     addFlip(page2, -180);
                     addFlip(page3, -180);
+                    addFlip(page4, -180);
                     translateCard(fullcardWidth);
-                    calenderpage.style.display = "none";
+                    contactpage.style.display = "none";
+                    
                     break;
             }
 
