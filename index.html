@@ -33,12 +33,12 @@
 
                     <div class="page2Zoom" id="lanternpage">
                         <!-- 內文 -->
-                        <img class="ilineLogo" src="./image/iline-logo.svg" alt="">
+                        <img class="ilineLogo" src="./image/iline-logo-1-03.svg" alt="">
                         <p class="contentText">
                             親愛的藥師夥伴，<br>感謝您長期的支持與信任！<br><br>
 
                             我們即將推出全新的 iLINE 系統，助您更輕鬆地管理顧客關係，提升服務效率。<br>
-                            透過 iLINE，您能快速掌握顧客消費喜好，並提供慢籤領藥功能，貼心提醒顧客領藥。<br>
+                            透過 iLINE ，您能快速掌握顧客消費喜好，並提供慢籤領藥功能，貼心提醒顧客領藥。<br>
                             此外，團購功能，幫助您靈活應對不同顧客的購物需求。<br>
                             期待 iLINE 為您帶來更便捷的管理體驗，<br>協助您提供更優質的社區服務！<br>
                         </p>
@@ -48,8 +48,9 @@
                             <span id="lightShop" class="lantern-light"></span>
                         </button>
                         <div id="popShop" class="pop">
-                            <img class="pop-img" src="./image/loading-snake.svg" alt="">
-                            <p>內容測試大約100字內容測試大約100字內容測試大約100字內容測試大約100字內容測試大約100字內容測試大約100字內容測試大約100字內容測試大約100字內容測試大約100字內容測試大約100字
+                            <img class="pop-img" src="./image/groupbuy.svg" alt="">
+                            <h3>解決團購效率低下</h3>
+                            <p>團購資訊散亂、訂單處理耗時？我們的團購功能幫您輕鬆開團，快速彙整訂單，簡化流程，讓團購管理更高效，節省時間與人力！
                             </p>
                             <button id="close-btn" onclick="hidePop()"></button>
                         </div>
@@ -59,8 +60,9 @@
                             <span id="lightMember" class="lantern-light"></span>
                         </button>
                         <div id="popMember" class="pop">
-                            <img class="pop-img" src="./image/loading-snake.svg" alt="">
-                            <p>membermembermembermembermembermembermembermembermembermembermembermembermembermembermembermembermembermembermembermembermembermembermembermember
+                            <img class="pop-img" src="./image/prescription.svg" alt="">
+                            <h3>解決慢籤管理不易</h3>
+                            <p>忘記提醒顧客領藥，導致用藥中斷？慢籤管理功能不僅提供領藥提醒，還能讓顧客安排身邊的親密家人或朋友協助領藥，貼心又便利！
                             </p>
                             <button id="close-btn" onclick="hidePop()"></button>
                         </div>
@@ -70,8 +72,9 @@
                             <span id="lightMedicine" class="lantern-light"></span>
                         </button>
                         <div id="popMedicine" class="pop">
-                            <img class="pop-img" src="./image/loading-snake.svg" alt="">
-                            <p>medicinemedicinemedicinemedicinemedicinemedicinemedicinemedicinemedicinemedicinemedicinemedicinemedicinemedicinemedicinemedicinemedicinemedicine
+                            <img class="pop-img" src="./image/member.svg" alt="">
+                            <h3>解決會員經營不易</h3>
+                            <p>難以維繫顧客忠誠度，提供個性化服務有困難？會員管理功能助您打造智慧會員體驗，提供點數查詢、交易記錄、優惠推播等服務，提升顧客滿意度與黏著度！
                             </p>
                             <button id="close-btn" onclick="hidePop()"></button>
                         </div>
@@ -202,6 +205,14 @@
                 <div class="back"></div>
             </div>
         </div>
+
+        <div class="dropHand">
+            <div class="dropHandArrow">
+                <span class="dropHandArrowTriangle"></span>
+                <span class="dropHandArrowLine"></span>
+                <img class="dropHandSvg" src="./image/pan_tool_alt.svg" alt="">
+            </div>
+        </div>
     </div>
 
 
@@ -284,6 +295,9 @@
         // tips 提示動畫
         const tips = document.querySelector('.tips');
 
+
+        // dropHand 提示動畫
+        const dropHand = document.querySelector('.dropHand');
 
 
         // 燈籠下墜
@@ -419,6 +433,9 @@
             } else {
                 startX = event.clientX;
             }
+
+            // 滑動提示暫時關閉
+            dropHand.style.display = "none";
         }
 
         function handleDragMove(event) {
@@ -445,9 +462,21 @@
                 // console.log("點擊在右半邊，clicknumber:", clicknumber);
                 isDragging = false; // 停止拖曳
             }
+
+            // 滑動提示暫時關閉
+            dropHand.style.display = "none";
+
         }
 
+        let dropHandTimeout;
+
         function handleDragEnd() {
+            // 每次翻頁時都隱藏滑動提示
+            dropHand.style.display = "none";
+
+            // 清除之前的定時器，避免重複觸發
+            clearTimeout(dropHandTimeout);
+
             // 根據 clicknumber 的值進行對應的操作
             switch (clicknumber) {
                 case 0:
@@ -457,6 +486,9 @@
                     removeFlip(page4);
                     closeLantern()
                     lanternpage.style.display = "none";
+                    dropHandTimeout = setTimeout(() => {
+                        dropHand.style.display = "flex";
+                    }, 1000);
                     break;
                 case 1:
                     addFlip(page1, -130, 0);
@@ -464,9 +496,12 @@
                     removeFlip(page3);
                     removeFlip(page4);
                     hidePop()
+                    showLantern()
                     calenderpage.style.display = "none";
                     lanternpage.style.display = "flex";
-                    showLantern()
+                    dropHandTimeout = setTimeout(() => {
+                        dropHand.style.display = "flex";
+                    }, 5000);
                     break;
                 case 2:
                     addFlip(page1, -130, 0);
@@ -477,6 +512,9 @@
                     calenderpage.style.display = "flex";
                     lanternpage.style.display = "none";
                     contactpage.style.display = "none";
+                    dropHandTimeout = setTimeout(() => {
+                        dropHand.style.display = "flex";
+                    }, 5000);
                     break;
                 case 3:
                     addFlip(page1, -130, 0);
@@ -486,6 +524,9 @@
                     calenderpage.style.display = "none";
                     contactpage.style.display = "flex";
                     translateCard(0);
+                    dropHandTimeout = setTimeout(() => {
+                        dropHand.style.display = "flex";
+                    }, 4000);
                     break;
                 case 4:
                     addFlip(page1, -180);
@@ -494,7 +535,6 @@
                     addFlip(page4, -180);
                     translateCard(fullcardWidth);
                     contactpage.style.display = "none";
-                    
                     break;
             }
 
@@ -555,6 +595,9 @@
                         document.getElementById("loadingContainer").style.display = "none";
                     }, 500); // 過渡時間
                 }, 500);
+                setTimeout(() => {
+                    dropHand.style.display = "flex";
+                }, 3000);
             }, Math.max(remainingTime, 0)); // 確保至少 2 秒的顯示時間
         };
 

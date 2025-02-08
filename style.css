@@ -153,37 +153,47 @@ button {
     src: url('./ZhuZiAWan-2.ttc') format("truetype");
 }
 
+@font-face {
+    font-family: 'GenSenRounded2TW-B';
+    src: url('./GenSenRounded2TW-B.otf') format("truetype");
+}
+
+@font-face {
+    font-family: 'GenSenRounded2TW-R';
+    src: url('./GenSenRounded2TW-R.otf') format("truetype");
+}
+
 /* 動畫區 */
 @keyframes ilineLogo{
     0%{
         top: 50%;
         transform: translateY(-50%);
         opacity: 0;
-        height: 300px;
+        /* height: 300px; */
     }
     60%{
         top: 50%;
         transform: translateY(-50%);
         opacity: 1;
-        height: 300px;
+        /* height: 300px; */
     }
     80%{
         top: 50%;
         transform: translateY(-50%);
         opacity: 0;
-        height: 300px;
+        /* height: 300px; */
     }
     85%{
-        top: 120px;
+        top: 150px;
         transform: translateY(0%);
         opacity: 0;
-        height: 100px;
+        /* height: 100px; */
     }
     100%{
-        top: 120px;
+        top: 150px;
         transform: translateY(0%);
         opacity: 1;
-        height: 100px;
+        /* height: 100px; */
     }
 }
 
@@ -381,6 +391,42 @@ button {
     }
 }
 
+@keyframes dropHand{
+    0%{
+        width: 0px;
+    }
+    25%{
+        width: 300px;
+    }
+    50%{
+        width: 300px;
+    }
+    75%{
+        width: 300px;
+    }
+    100%{
+        width: 0px;
+    }
+}
+
+@keyframes dropHand-opacity{
+    0%{
+        opacity: 0;
+    }
+    25%{
+        opacity: 1;
+    }
+    50%{
+        opacity: 0;
+    }
+    75%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
 .card-position {
     height: 100vh;
     display: flex;
@@ -476,8 +522,8 @@ button {
     top: 50%;
     transform: translateY(-50%);
     opacity: 0;
-    height: 300px;
-    margin-bottom: 30px;
+    width: 400px;
+    /* margin-bottom: 30px; */
     animation: ilineLogo 3.8s ease-in-out 0s normal forwards;
 }
 
@@ -485,7 +531,7 @@ button {
     transform: translateY(65px);
     text-align: center;
     width: 70%;
-    font-family: "Noto Sans TC", sans-serif;
+    font-family: "GenSenRounded2TW-B", sans-serif;
     font-size: 24px;
     line-height:200%;
     font-weight: 300;
@@ -594,7 +640,7 @@ button {
 #iline-member {
     height: 792px;
     left: 32px;
-    top: 0px;
+    top: -35px;
     z-index: 1;
 
     animation: lantern 2s ease-in-out .7s normal forwards;
@@ -639,7 +685,18 @@ button {
 
 .pop-img {
     width: 40%;
-    margin: 40px 0px 80px 0px;
+    margin: 20px 0px 40px 0px;
+}
+
+.pop h3{
+    font-family: "GenSenRounded2TW-B", sans-serif;
+    /* font-weight: 500; */
+    font-size: 24px;
+    margin-bottom: 32px;
+}
+
+.pop p{
+    font-family: "GenSenRounded2TW-M", sans-serif;
 }
 
 #close-btn {
@@ -947,6 +1004,7 @@ button {
 #contactpage>h4{
     font-family: "ZhuZiAWan";
     font-size: 28px;
+    font-weight: 600;
 
     opacity: 0;
     animation: opacity 1.5s ease-in-out 1.3s normal forwards;
@@ -986,6 +1044,8 @@ button {
     border-radius: 50px;
     font-size: 20px;
     font-family: "ZhuZiAWan";
+    font-weight: 600;
+
 }
 
 .conpanyWeb{
@@ -1114,4 +1174,56 @@ button {
 
     opacity: 0;
     animation: flower-opacity 8s ease 1.3s forwards, flower-rotate 8s linear 1.3s infinite;
+}
+
+/* 滑動提示 */
+.dropHand{
+    position: absolute;
+    left: 50%;
+    bottom: 100px;
+    transform: translate(-50%,-50%);
+    /* background-color: #15e6e9; */
+    width: 300px;
+
+    display: none;
+    justify-content: right;
+    filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.3));
+    opacity: 0;
+    
+    animation: dropHand-opacity 5s ease-in-out 0s normal infinite;
+    zoom: var(--page2Zoom);
+}
+
+.dropHandArrow{
+    position: relative;
+    width: fit-content;
+}
+
+.dropHandArrowTriangle{
+    width: 30px;
+    height: 30px;
+    clip-path: polygon(0 50%, 100% 100%, 100% 0);
+
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    background-color: #FFF;
+}
+
+.dropHandArrowLine{
+    /* background-color: #22AC38; */
+    background: linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 50px,rgba(255,255,255,0) 100%);
+    width: 0px;
+    height: 10px;
+    clip-path: polygon(30px 0, 100% 0, 100% 100%, 30px 100%, 0% 50%);
+
+    animation: dropHand 5s ease-in-out 0s normal infinite;
+}
+
+.dropHandSvg{
+    width: 60px;
+    position: absolute;
+    left: -5px;
+    top: 20px;
 }
